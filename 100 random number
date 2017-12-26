@@ -1,0 +1,8 @@
+```{r }
+x <- rnorm(100)
+x
+mean(x)
+median(x)
+var(x)
+hist(x)
+```
