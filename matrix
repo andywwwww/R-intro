@@ -1,0 +1,10 @@
+(mat <- matrix(1:12, ncol = 4,  nrow = 3))
+matrix(1:12, ncol = 4,  nrow = 3, byrow = T)
+players <- c("Andy Murray", "Rafael Nadal", "Stan Wawrinka", 
+             "Novak Djokovic", "Roger Federer")
+grand_slam_win <- c(9, 15, 5, 12, 18)
+win_percentage <- c(78.07, 82.48, 63.96, 82.77, 81.80)
+(mat <- cbind(grand_slam_win, win_percentage))
+rownames(mat)
+cbind(1,2)
+rbind(1,2)
