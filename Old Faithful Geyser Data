@@ -1,0 +1,54 @@
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+   
+   # Application title
+   titlePanel("Old Faithful Geyser Data"),
+   
+   # Sidebar with a slider input for number of bins 
+   sidebarLayout(
+      sidebarPanel(
+         textInput("fun","function to integrate","sin(x)"),
+         numericInput("dw", "lower bound", 0, -100, 100),
+         numericInput("up", "mid bound", 1, -100, 100),
+         numericInput("B", "upper bound", 10^5, 1000, 10^9),
+         actionButton("compute","compute integral")
+      ),
+      
+      # Show a plot of the generated distribution
+      mainPanel(
+         plotOutput("myintegral")
+      )
+   )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+   #use the same name for plotoutput and after output$
+#   output$myintegral <- renderPlot({
+      # generate bins based on input$bins from ui.R
+ #     obj = mc_int(x_range = c(input$dw, input$up),
+  #                 fun = input$fun, B = input$B)
+   #   plot(obj)
+  int <- eventReactive(input$compute,{
+    mc_int(x_range = c(input$dw, input$up),
+           fun = input$fun, B = input$B)
+  })
+  output$myintegral <- renderPlot({
+    plot(int())
+   })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
